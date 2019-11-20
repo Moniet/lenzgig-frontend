@@ -281,7 +281,6 @@ export default () => {
             margin-top: 2em;
             overflow-x: scroll;
           `}
-          alignTop
         >
           <Card>
             <Flex direction={'column'} left>
