@@ -75,6 +75,7 @@ export default () => {
       <div
         css={css`
           max-width: 1100px;
+          margin: 0 auto;
         `}
       ></div>
       <LogoContainer>
