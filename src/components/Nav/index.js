@@ -10,22 +10,16 @@ import Flex from '../../common/Flex'
 import Button from '../../common/Button'
 
 const Container = styled.div`
-  position: fixed;
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  top: 0;
-  left: 0;
-  max-width: 100%;
+  max-width: 1100px;
   width: 100%;
   padding: 1em 2em;
   background: white;
-  box-shadow: ${({ fixed }) =>
-    fixed ? '0px 3px 8px rgba(0,0,0,0.06)' : 'none'};
   left: 50%;
   transform: translate(-50%);
-  transition: box-shadow 250ms ease;
-  z-index: 2000;
 `
 
 const LogoContainer = styled.div`
@@ -53,6 +47,17 @@ const UL = styled.ul`
     align-items: center;
   }
 `
+const Nav = styled.nav`
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: white;
+  width: 100%;
+  box-shadow: ${({ fixed }) =>
+    fixed ? '0px 3px 8px rgba(0,0,0,0.06)' : 'none'};
+  transition: box-shadow 250ms ease;
+  z-index: 2000;
+`
 
 export default () => {
   const theme = useTheme()
@@ -71,36 +76,32 @@ export default () => {
   }, [])
 
   return (
-    <Container fixed={fixed}>
-      <div
-        css={css`
-          max-width: 1100px;
-          margin: 0 auto;
-        `}
-      ></div>
-      <LogoContainer>
-        <Logo />
-      </LogoContainer>
-      <UL>
-        <li>
-          <LinkContainer color={theme.colors.gray}>
-            <Link to="/">How it works</Link>
-          </LinkContainer>
-        </li>
-        <li>
-          <LinkContainer color={theme.colors.gray}>
-            <Link to="/">About</Link>
-          </LinkContainer>
-        </li>
-        <li>
-          <LinkContainer color={theme.colors.gray}>
-            <Link to="/">News</Link>
-          </LinkContainer>
-        </li>
-      </UL>
-      <Button border color={theme.colors.primary}>
-        Get early access
-      </Button>
-    </Container>
+    <Nav fixed={fixed}>
+      <Container>
+        <LogoContainer>
+          <Logo />
+        </LogoContainer>
+        <UL>
+          <li>
+            <LinkContainer color={theme.colors.gray}>
+              <Link to="/">How it works</Link>
+            </LinkContainer>
+          </li>
+          <li>
+            <LinkContainer color={theme.colors.gray}>
+              <Link to="/">About</Link>
+            </LinkContainer>
+          </li>
+          <li>
+            <LinkContainer color={theme.colors.gray}>
+              <Link to="/">News</Link>
+            </LinkContainer>
+          </li>
+        </UL>
+        <Button border color={theme.colors.primary}>
+          Get early access
+        </Button>
+      </Container>
+    </Nav>
   )
 }
