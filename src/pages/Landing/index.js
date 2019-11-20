@@ -128,6 +128,7 @@ const Card = styled.div`
   margin-right: 2em;
   flex-basis: 1;
   max-width: 250px;
+  min-width: 200px;
   text-align: center;
 
   h3 {
@@ -273,9 +274,12 @@ export default () => {
             expand your skills
           </p>
         </Flex>
-        <Flex
+        <div
           css={css`
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             margin-top: 2em;
+            overflow-x: scroll;
           `}
           alignTop
         >
@@ -316,7 +320,7 @@ export default () => {
               </p>
             </Flex>
           </Card>
-        </Flex>
+        </div>
       </Container>
       <footer
         css={css`
