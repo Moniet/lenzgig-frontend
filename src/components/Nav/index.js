@@ -1,4 +1,6 @@
-import React from 'react'
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core'
+import React, { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 import { ReactComponent as Logo } from '../../assets/img/logo.svg'
 import { Link } from 'react-router-dom'
@@ -8,17 +10,21 @@ import Flex from '../../common/Flex'
 import Button from '../../common/Button'
 
 const Container = styled.div`
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
   top: 0;
   left: 0;
-  max-width: 1100px;
+  max-width: 100%;
   width: 100%;
   padding: 1em 2em;
+  background: white;
+  box-shadow: ${({ fixed }) =>
+    fixed ? '0px 3px 8px rgba(0,0,0,0.06)' : 'none'};
   left: 50%;
   transform: translate(-50%);
+  transition: box-shadow 250ms ease;
   z-index: 2000;
 `
 
@@ -50,9 +56,27 @@ const UL = styled.ul`
 
 export default () => {
   const theme = useTheme()
+  const [fixed, setFixed] = useState(false)
+
+  const handleScroll = e => {
+    if (window.scrollY > 1) {
+      setFixed(true)
+    } else {
+      setFixed(false)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <Container>
+    <Container fixed={fixed}>
+      <div
+        css={css`
+          max-width: 1100px;
+        `}
+      ></div>
       <LogoContainer>
         <Logo />
       </LogoContainer>
