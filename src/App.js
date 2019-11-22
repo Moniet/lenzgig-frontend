@@ -6,7 +6,6 @@ import Global from './Global'
 import Reset from './Reset'
 import Landing from './pages/Landing'
 import Nav from './components/Nav'
-
 function App() {
   return (
     <ThemeProvider theme={theme}>
