@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
 import { ReactComponent as Logo } from '../../assets/img/logo.svg'
 import { Link } from 'react-router-dom'
@@ -8,6 +8,9 @@ import { theme } from '../../utils/theme'
 import { useTheme } from 'emotion-theming'
 import Flex from '../../common/Flex'
 import Button from '../../common/Button'
+
+import { ReactComponent as HamburgerIcon } from '../../assets/img/hamburger.svg'
+import { landingBps } from '../../utils/responsive'
 
 const Container = styled.div`
   position: relative;
@@ -20,10 +23,28 @@ const Container = styled.div`
   background: white;
   left: 50%;
   transform: translate(-50%);
+
+  ${landingBps[0]} {
+    justify-content: center;
+  }
 `
 
 const LogoContainer = styled.div`
   max-width: 250px;
+
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  ${landingBps[1]} {
+    max-width: 200px;
+  }
+
+  ${landingBps[2]} {
+    min-width: 100px;
+    max-width: 150px;
+  }
 `
 
 const LinkContainer = styled.div`
@@ -46,6 +67,14 @@ const UL = styled.ul`
   div {
     align-items: center;
   }
+
+  ${landingBps[1]} {
+    flex-flow: column wrap;
+    justify-content: center;
+    & > * {
+      margin-bottom: 1em;
+    }
+  }
 `
 const Nav = styled.nav`
   position: fixed;
@@ -59,9 +88,72 @@ const Nav = styled.nav`
   z-index: 2000;
 `
 
+const Hamburger = styled.button`
+  position: absolute;
+  top: -0.75em;
+  left: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  background: none;
+  margin: 2.25em 2em;
+  padding: 0;
+  opacity: 0;
+  transition: opacity 500ms ease;
+  outline: none;
+
+  svg {
+    width: 100%;
+    fill: #838383;
+  }
+
+  ${landingBps[1]} {
+    opacity: 1;
+  }
+  ${landingBps[2]} {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  z-index: 10000;
+`
+
+const NavList = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  justify-content: space-evenly;
+  transform: scale(1);
+
+  ${landingBps[1]} {
+    position: absolute;
+    flex-flow: column wrap;
+    justify-content: space-evenly;
+    padding: 1em;
+    height: 300px;
+    width: 250px;
+    left: 0;
+    bottom: 0;
+    margin-top: 2em;
+    margin-left: 2em;
+    background: white;
+    border: solid 1px black;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+    z-index: 3000;
+    border-radius: 10px;
+    transform: ${({ showDropdown }) =>
+      showDropdown ? 'scale(1)' : 'scale(0)'};
+    transition: transform 250ms ease;
+  }
+`
+
 export default () => {
   const theme = useTheme()
   const [fixed, setFixed] = useState(false)
+  const dropdown = useRef(null)
+  const [showDropdown, setShowDropdown] = useState(false)
 
   const handleScroll = e => {
     if (window.scrollY > 1) {
@@ -71,37 +163,64 @@ export default () => {
     }
   }
 
+  const handleClick = () => {
+    setShowDropdown(!showDropdown)
+  }
+
   useEffect(() => {
+    //get body
+    // add resize event listener
+    // boundingRect, if it is lesser than X then don't show else dont show
+
+    // let body = document.querySelector('body')
+    // let bodySize = body.getBoundingClientRect().width
+
+    // if (bodySize < 1125) {
+    //   if (dropdown.current) {
+    //     if (showDropdown) dropdown.current.style.transform = 'scale(1)'
+    //     else dropdown.current.style.transform = 'scale(0)'
+    //   }
+    // }
+
     window.addEventListener('scroll', handleScroll)
-  }, [])
+  }, [dropdown, fixed, showDropdown])
 
   return (
-    <Nav fixed={fixed}>
-      <Container>
-        <LogoContainer>
-          <Logo />
-        </LogoContainer>
-        <UL>
-          <li>
-            <LinkContainer color={theme.colors.gray}>
-              <Link to="/">How it works</Link>
-            </LinkContainer>
-          </li>
-          <li>
-            <LinkContainer color={theme.colors.gray}>
-              <Link to="/">About</Link>
-            </LinkContainer>
-          </li>
-          <li>
-            <LinkContainer color={theme.colors.gray}>
-              <Link to="/">News</Link>
-            </LinkContainer>
-          </li>
-        </UL>
-        <Button border color={theme.colors.primary}>
-          Get early access
-        </Button>
-      </Container>
-    </Nav>
+    <header>
+      <Nav fixed={fixed}>
+        <Container>
+          <LogoContainer>
+            <Logo />
+          </LogoContainer>
+
+          <NavList showDropdown={showDropdown}>
+            <UL>
+              <li>
+                <LinkContainer color={theme.colors.gray}>
+                  <Link to="/">How it works</Link>
+                </LinkContainer>
+              </li>
+              <li>
+                <LinkContainer color={theme.colors.gray}>
+                  <Link to="/">About</Link>
+                </LinkContainer>
+              </li>
+              <li>
+                <LinkContainer color={theme.colors.gray}>
+                  <Link to="/">News</Link>
+                </LinkContainer>
+              </li>
+            </UL>
+            <Button border color={theme.colors.primary}>
+              Get early access
+            </Button>
+          </NavList>
+
+          <Hamburger onClick={e => handleClick()}>
+            <HamburgerIcon />
+          </Hamburger>
+        </Container>
+      </Nav>
+    </header>
   )
 }
