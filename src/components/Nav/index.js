@@ -1,16 +1,16 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import { jsx } from '@emotion/core'
 import React, { useState, useEffect, useRef } from 'react'
 import styled from '@emotion/styled'
 import { ReactComponent as Logo } from '../../assets/img/logo.svg'
 import { Link } from 'react-router-dom'
-import { theme } from '../../utils/theme'
 import { useTheme } from 'emotion-theming'
-import Flex from '../../common/Flex'
 import Button from '../../common/Button'
 
 import { ReactComponent as HamburgerIcon } from '../../assets/img/hamburger.svg'
 import { landingBps } from '../../utils/responsive'
+import { EarlyAccessDialog } from '../../common/Dialog/EarlyAccessDialog'
+import { StartSurveyDialog } from '../../common/Dialog/StartSurveyDialog'
 
 const Container = styled.div`
   position: relative;
@@ -154,6 +154,8 @@ export default () => {
   const [fixed, setFixed] = useState(false)
   const dropdown = useRef(null)
   const [showDropdown, setShowDropdown] = useState(false)
+  const [showDialog, setEarlyAccessDialog] = useState(false)
+  const [showStartSurveyDialog, setStartSurveyDialog] = useState(false)
 
   const handleScroll = e => {
     if (window.scrollY > 1) {
@@ -165,6 +167,15 @@ export default () => {
 
   const handleClick = () => {
     setShowDropdown(!showDropdown)
+  }
+
+  const handleEarlyAccessDialog = () => {
+    setEarlyAccessDialog(!showDialog)
+  }
+
+  const handleStartSurveyDialog = () => {
+    setEarlyAccessDialog(false);
+    setStartSurveyDialog(!showStartSurveyDialog)
   }
 
   useEffect(() => {
@@ -183,7 +194,7 @@ export default () => {
     // }
 
     window.addEventListener('scroll', handleScroll)
-  }, [dropdown, fixed, showDropdown])
+  }, [dropdown, fixed, showDropdown, showDialog, showStartSurveyDialog])
 
   return (
     <header>
@@ -211,7 +222,11 @@ export default () => {
                 </LinkContainer>
               </li>
             </UL>
-            <Button border color={theme.colors.primary}>
+            <Button
+              border
+              color={theme.colors.primary}
+              onClick={handleEarlyAccessDialog}
+            >
               Get early access
             </Button>
           </NavList>
@@ -219,6 +234,19 @@ export default () => {
           <Hamburger onClick={e => handleClick()}>
             <HamburgerIcon />
           </Hamburger>
+
+          <EarlyAccessDialog
+            showDialog={showDialog}
+            handleEarlyAccessDialog={handleEarlyAccessDialog}
+            handleStartSurveyDialog={handleStartSurveyDialog}
+            theme={theme}
+          />
+
+          <StartSurveyDialog
+            showStartSurveyDialog={showStartSurveyDialog}
+            handleStartSurveyDialog={handleStartSurveyDialog}
+            theme={theme}
+          />
         </Container>
       </Nav>
     </header>
