@@ -13,7 +13,7 @@
     />
 
     <!-- Start of Global site tag (gtag.js) - Google Analytics -->
-    <script>  
+    <!-- <script>  
       const host = window.location.hostname;
       if (host !== "localhost") {
           (function(i,s,o,g,r,a,m){i['GoogleAn alyticsObject']=r;i[r]=i[r]||function(){  
@@ -22,8 +22,11 @@
           })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
           ga('create', 'UA-150988904-2', 'auto');  
           ga('send', 'pageview');
-        }
-    </script>
+          function globalGa() {
+            console.log("Global GA will be here");
+          }
+      }
+    </script> -->
     <!-- End of Global site tag (gtag.js) - Google Analytics -->
     
     <!-- If we are going to use GST -->
