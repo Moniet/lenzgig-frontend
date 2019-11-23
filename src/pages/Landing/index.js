@@ -149,9 +149,8 @@ const Form = styled.form`
 `
 
 const CardIMG = styled.div`
-  overflow: hidden;
-  border-radius: 20px;
-
+  display: block;
+  overflow: visible;
   img {
     object-fit: cover;
   }
