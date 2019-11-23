@@ -24,6 +24,7 @@ const Button = styled.button`
   font-weight: bold;
   padding: 0.5em 1em;
   max-width: 200px;
+  cursor: pointer;
 `
 
 export default props => {

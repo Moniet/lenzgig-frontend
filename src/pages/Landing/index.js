@@ -144,7 +144,9 @@ const Card = styled.div`
 
 export default () => {
   const theme = useTheme()
-
+  function handleSignUp() {
+    // alert('test')
+  }
   useEffect(() => {
     let dude = document.querySelector('#dude-man')
     dude.style.animation = `float 1.5s ease-in-out alternate infinite`
@@ -196,6 +198,7 @@ export default () => {
                             flex-basis: auto;
                             padding: 0.25em 2em;
                           `}
+                          onClick={handleSignUp}
                         >
                           Sign Up
                         </button>
