@@ -48,5 +48,6 @@ const resolvePost = async (...args) => {
 // catalog methods
 
 export default {
-  signUp: (data = {}) => resolvePost(Conf.signUp, data)
+  signUp: (data = {}) => resolvePost(Conf.signUp, data),
+  inviteClick: (data = {}) => resolvePost(Conf.invitation, data)
 }
