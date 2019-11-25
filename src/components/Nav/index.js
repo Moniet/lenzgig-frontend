@@ -11,6 +11,7 @@ import { ReactComponent as HamburgerIcon } from '../../assets/img/hamburger.svg'
 import { landingBps } from '../../utils/responsive'
 import { EarlyAccessDialog } from '../../common/Dialog/EarlyAccessDialog'
 import { StartSurveyDialog } from '../../common/Dialog/StartSurveyDialog'
+import { User } from '../../containers/appAction';
 
 const Container = styled.div`
   position: relative;
@@ -175,7 +176,17 @@ export default () => {
 
   const handleStartSurveyDialog = () => {
     setEarlyAccessDialog(false);
-    setStartSurveyDialog(!showStartSurveyDialog)
+    setStartSurveyDialog(!showStartSurveyDialog);
+  }
+
+  const handleStartSurvey = async (userObject = {}) => {
+    const userData = await User.signUp(userObject);
+    console.log("signup successfull", userObject, userData);
+    if (!userData) {
+      console.log('signup error occured');
+    } else {
+      handleStartSurveyDialog();
+    }
   }
 
   useEffect(() => {
@@ -239,6 +250,7 @@ export default () => {
             showDialog={showDialog}
             handleEarlyAccessDialog={handleEarlyAccessDialog}
             handleStartSurveyDialog={handleStartSurveyDialog}
+            handleStartSurvey={handleStartSurvey}
             theme={theme}
           />
 

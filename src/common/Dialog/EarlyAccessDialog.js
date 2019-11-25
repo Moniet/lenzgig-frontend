@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React from 'react'
+import React, { useState } from 'react'
 import { Dialog, withStyles } from '@material-ui/core'
 import MuiDialogTitle from '@material-ui/core/DialogTitle'
 import MuiDialogContent from '@material-ui/core/DialogContent'
@@ -97,6 +97,25 @@ const DialogContent = withStyles(theme => ({
 
 const EarlyAccessDialog = withStyles(styles)(props => {
   const { classes, theme } = props
+  const [userEmail, setUserEmail] = useState({ email: '' })
+
+  const handleEmailChange = e => {
+    setUserEmail({ email: e.target.value })
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault()
+    const target = event.target;
+    let formValue = {};
+
+    for (let i = 0; i < target.elements.length - 1; i++) {
+      let id = target.elements[i].id,
+        value = target.elements[i].value
+      formValue[id] = value
+    }
+
+    props.handleStartSurvey(formValue);
+  }
 
   return (
     <Dialog
@@ -134,6 +153,7 @@ const EarlyAccessDialog = withStyles(styles)(props => {
         </Typography>
         <Box className={classes.formContainer}>
           <Form
+            onSubmit={handleSubmit}
             css={css`
               font-size: 15px;
               ${landingBps[1]} {
@@ -147,9 +167,15 @@ const EarlyAccessDialog = withStyles(styles)(props => {
                 justify-content: center;
               `}
             >
-              <Input placeholder="Your Email" />
+              <Input
+                placeholder="Your Email"
+                name="email"
+                id="email"
+                value={userEmail.email}
+                onChange={handleEmailChange}
+              />
               <button
-                type="button"
+                type="submit"
                 css={css`
                   background: ${theme.colors.primary};
                   color: white;
@@ -161,7 +187,6 @@ const EarlyAccessDialog = withStyles(styles)(props => {
                   flex-basis: auto;
                   padding: 0.25em 2em;
                 `}
-                onClick={props.handleStartSurveyDialog}
               >
                 Sign Up
               </button>
