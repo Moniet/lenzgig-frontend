@@ -7,6 +7,8 @@ import Global from './Global'
 import Reset from './Reset'
 import Landing from './pages/Landing'
 import Nav from './components/Nav'
+import { User } from './containers/appAction'
+
 function App() {
   // Adding GA through npm in production mode
   if (process.env.NODE_ENV === 'production') {
@@ -15,6 +17,9 @@ function App() {
       titleCase: false
     })
   }
+  // When link is shared and clicked
+  User.inviteLoad()
+
   return (
     <ThemeProvider theme={theme}>
       <div className="app">
