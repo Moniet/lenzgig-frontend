@@ -6,12 +6,13 @@ import { ReactComponent as Logo } from '../../assets/img/logo.svg'
 import { Link } from 'react-router-dom'
 import { useTheme } from 'emotion-theming'
 import Button from '../../common/Button'
+import { has } from 'lodash'
 
 import { ReactComponent as HamburgerIcon } from '../../assets/img/hamburger.svg'
 import { landingBps } from '../../utils/responsive'
 import { EarlyAccessDialog } from '../Dialog/EarlyAccessDialog'
 import { StartSurveyDialog } from '../Dialog/StartSurveyDialog'
-import { User } from '../../containers/appAction';
+import { handleStartSurvey } from '../../utils/commonFunction'
 
 const Container = styled.div`
   position: relative;
@@ -157,6 +158,8 @@ export default () => {
   const [showDropdown, setShowDropdown] = useState(false)
   const [showDialog, setEarlyAccessDialog] = useState(false)
   const [showStartSurveyDialog, setStartSurveyDialog] = useState(false)
+  const [showSnackbar, setShowSnackbar] = useState(false)
+  const [snackbarMessage, setSnackbarMessage] = useState('')
 
   const handleScroll = e => {
     if (window.scrollY > 1) {
@@ -164,6 +167,11 @@ export default () => {
     } else {
       setFixed(false)
     }
+  }
+
+  const handleSnackbar = () => {
+    setShowSnackbar(!showSnackbar)
+    setSnackbarMessage('');
   }
 
   const handleClick = () => {
@@ -175,17 +183,19 @@ export default () => {
   }
 
   const handleStartSurveyDialog = () => {
-    setEarlyAccessDialog(false);
-    setStartSurveyDialog(!showStartSurveyDialog);
+    setEarlyAccessDialog(false)
+    setStartSurveyDialog(!showStartSurveyDialog)
   }
 
-  const handleStartSurvey = async (userObject = {}) => {
-    const userData = await User.signUp(userObject);
-    console.log("signup successfull", userObject, userData);
-    if (!userData) {
-      console.log('signup error occured');
+  const handleStartSurveySubmit = async (userObject = {}) => {
+    const userData = await handleStartSurvey(userObject)
+    if (!has(userData, 'error')) {
+      console.log('successfull', userData)
+      handleStartSurveyDialog()
     } else {
-      handleStartSurveyDialog();
+      console.log('signup error occured', userData)
+      setSnackbarMessage(userData.error.message);
+      setShowSnackbar(!showSnackbar)
     }
   }
 
@@ -250,7 +260,10 @@ export default () => {
             showDialog={showDialog}
             handleEarlyAccessDialog={handleEarlyAccessDialog}
             handleStartSurveyDialog={handleStartSurveyDialog}
-            handleStartSurvey={handleStartSurvey}
+            handleStartSurveySubmit={handleStartSurveySubmit}
+            handleSnackbar={handleSnackbar}
+            showSnackbar={showSnackbar}
+            snackbarMessage={snackbarMessage}
             theme={theme}
           />
 

@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import { jsx, css, keyframes } from '@emotion/core'
 import { useTheme } from 'emotion-theming'
+import { Snackbar } from '@material-ui/core'
 import { ReactComponent as Illustration } from '../../assets/img/landing-page-illustration.svg'
 import { ReactComponent as Logo } from '../../assets/img/logo.svg'
+import { has } from 'lodash'
 
 import IMG from '../../common/IMG'
 import Flex from '../../common/Flex'
@@ -20,7 +22,8 @@ import person1 from '../../assets/img/person-1.png'
 import person2 from '../../assets/img/person-2.png'
 import person3 from '../../assets/img/person-3.png'
 import { landingBps } from '../../utils/responsive'
-import { User } from '../../containers/appAction';
+import { StartSurveyDialog } from '../../components/Dialog/StartSurveyDialog'
+import { handleSignUp, handleStartSurvey } from '../../utils/commonFunction'
 
 const Container = styled.div`
   position: relative;
@@ -191,6 +194,9 @@ export default () => {
   const [userEmailA, setUserEmailA] = useState({ email: '' })
   const [userEmailB, setUserEmailB] = useState({ email: '' })
   const [userEmailC, setUserEmailC] = useState({ email: '' })
+  const [showStartSurveyDialog, setStartSurveyDialog] = useState(false)
+  const [showSnackbar, setShowSnackbar] = useState(false)
+  const [snackbarMessage, setSnackbarMessage] = useState('')
 
   const handleEmailChange = (e, index) => {
     switch (index) {
@@ -206,28 +212,26 @@ export default () => {
     }
   }
 
-  const handleSignUp = event => {
-    event.preventDefault()
-    const target = event.target
-    let formValue = {}
-
-    for (let i = 0; i < target.elements.length - 1; i++) {
-      let id = target.elements[i].id,
-        value = target.elements[i].value
-      formValue[id] = value
+  const handleFormSubmit = async event => {
+    const userObject = await handleSignUp(event)
+    const userData = await handleStartSurvey(userObject)
+    if (!has(userData, 'error')) {
+      console.log('successfull', userData)
+      setStartSurveyDialog(!showStartSurveyDialog)
+    } else {
+      console.log('Not successfull', userData)
+      setSnackbarMessage(userData.error.message);
+      setShowSnackbar(!showSnackbar)
     }
-    console.log('home page signup value', formValue)
-    handleStartSurvey(formValue);
   }
 
-  const handleStartSurvey = async (userObject = {}) => {
-    const userData = await User.signUp(userObject);
-    console.log("signup successfull", userObject, userData);
-    if (!userData) {
-      console.log('signup error occured');
-    } else {
-      console.log('No error occured', userData);
-    }
+  const handleSnackbar = () => {
+    setShowSnackbar(!showSnackbar)
+    setSnackbarMessage('');
+  }
+
+  const handleStartSurveyDialog = () => {
+    setStartSurveyDialog(!showStartSurveyDialog)
   }
 
   useEffect(() => {
@@ -274,7 +278,7 @@ export default () => {
                         display: none;
                       }
                     `}
-                    onSubmit={handleSignUp}
+                    onSubmit={handleFormSubmit}
                   >
                     <label>Want to get early access to our platform?</label>
                     <div
@@ -289,11 +293,13 @@ export default () => {
                       `}
                     >
                       <Input
+                        type="email"
                         placeholder="Your Email"
                         name="email"
                         id="email"
                         value={userEmailA.email}
                         onChange={e => handleEmailChange(e, 0)}
+                        required
                       />
                       <button
                         type="submit"
@@ -356,7 +362,7 @@ export default () => {
                     text-align: center;
                   }
                 `}
-                onSubmit={handleSignUp}
+                onSubmit={handleFormSubmit}
               >
                 <label>Want to get early access to our platform?</label>
                 <div
@@ -371,6 +377,8 @@ export default () => {
                   `}
                 >
                   <Input
+                    type="email"
+                    required
                     placeholder="Your Email"
                     name="email"
                     id="email"
@@ -576,7 +584,7 @@ export default () => {
                 margin-top: 2em;
               }
             `}
-            onSubmit={handleSignUp}
+            onSubmit={handleFormSubmit}
           >
             <Flex
               css={css`
@@ -584,7 +592,8 @@ export default () => {
               `}
             >
               <Input
-                type="text"
+                type="email"
+                required
                 placeholder="Your Email"
                 negative
                 name="email"
@@ -645,6 +654,19 @@ export default () => {
           </div>
         </div>
       </footer>
+      <StartSurveyDialog
+        showStartSurveyDialog={showStartSurveyDialog}
+        handleStartSurveyDialog={handleStartSurveyDialog}
+        theme={theme}
+      />
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        autoHideDuration={3000}
+        key="bottom-center"
+        open={showSnackbar}
+        onClose={handleSnackbar}
+        message={<span id="message-id">{snackbarMessage}</span>}
+      />
     </>
   )
 }

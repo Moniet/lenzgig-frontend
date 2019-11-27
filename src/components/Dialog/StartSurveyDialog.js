@@ -85,6 +85,7 @@ const StartSurveyDialog = withStyles(styles)(props => {
       aria-labelledby="customized-dialog-title"
       open={props.showStartSurveyDialog}
       onClose={props.handleStartSurveyDialog}
+      onExited={handleShowIframe}
       maxWidth={!showIframe ? 'xs' : 'xl'}
     >
       {!showIframe ? (

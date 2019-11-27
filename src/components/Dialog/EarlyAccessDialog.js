@@ -9,11 +9,13 @@ import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import styled from '@emotion/styled'
 import { jsx, css } from '@emotion/core'
+import { Snackbar } from '@material-ui/core'
 
 import IMG from '../../common/IMG'
 import { ReactComponent as Logo } from '../../assets/img/logo.svg'
 import EarlyAccessHeader from '../../assets/img/early-access-header.png'
 import { landingBps } from '../../utils/responsive'
+import { handleSignUp } from '../../utils/commonFunction'
 
 const Form = styled.form`
   position: relative;
@@ -104,102 +106,105 @@ const EarlyAccessDialog = withStyles(styles)(props => {
   }
 
   const handleSubmit = event => {
-    event.preventDefault()
-    const target = event.target;
-    let formValue = {};
-
-    for (let i = 0; i < target.elements.length - 1; i++) {
-      let id = target.elements[i].id,
-        value = target.elements[i].value
-      formValue[id] = value
-    }
-
-    props.handleStartSurvey(formValue);
+    const formValue = handleSignUp(event)
+    props.handleStartSurveySubmit(formValue)
   }
 
   return (
-    <Dialog
-      aria-labelledby="customized-dialog-title"
-      open={props.showDialog}
-      onClose={props.handleEarlyAccessDialog}
-      maxWidth="xs"
-    >
-      <DialogTitle
-        id="customized-dialog-title"
+    <React.Fragment>
+      <Dialog
+        aria-labelledby="customized-dialog-title"
+        open={props.showDialog}
         onClose={props.handleEarlyAccessDialog}
-      ></DialogTitle>
-      <DialogContent>
-        <Box className={classes.headerImageContainer}>
-          <IMG src={EarlyAccessHeader} alt="early access header logo" />
-        </Box>
-        <Typography
-          css={css`
-            color: #484848 !important;
-            font-weight: bold !important;
-            font-size: 22px !important;
-            line-height: 31px !important;
-            font-family: Montserrat !important;
-            letter-spacing: 0 !important;
-            margin-bottom: 1em !important;
-
-            ${landingBps[1]} {
-              font-size: 14px !important;
-              line-height: 25px !important;
-            }
-          `}
-        >
-          Want to get early access to our platform and be part of our exclusive
-          community?
-        </Typography>
-        <Box className={classes.formContainer}>
-          <Form
-            onSubmit={handleSubmit}
+        maxWidth="xs"
+      >
+        <DialogTitle
+          id="customized-dialog-title"
+          onClose={props.handleEarlyAccessDialog}
+        ></DialogTitle>
+        <DialogContent>
+          <Box className={classes.headerImageContainer}>
+            <IMG src={EarlyAccessHeader} alt="early access header logo" />
+          </Box>
+          <Typography
             css={css`
-              font-size: 15px;
+              color: #484848 !important;
+              font-weight: bold !important;
+              font-size: 22px !important;
+              line-height: 31px !important;
+              font-family: Montserrat !important;
+              letter-spacing: 0 !important;
+              margin-bottom: 1em !important;
+
               ${landingBps[1]} {
-                font-size: 9px;
+                font-size: 14px !important;
+                line-height: 25px !important;
               }
             `}
           >
-            <div
+            Want to get early access to our platform and be part of our
+            exclusive community?
+          </Typography>
+          <Box className={classes.formContainer}>
+            <Form
+              onSubmit={handleSubmit}
               css={css`
-                display: flex;
-                justify-content: center;
+                font-size: 15px;
+                ${landingBps[1]} {
+                  font-size: 9px;
+                }
               `}
             >
-              <Input
-                placeholder="Your Email"
-                name="email"
-                id="email"
-                value={userEmail.email}
-                onChange={handleEmailChange}
-              />
-              <button
-                type="submit"
+              <div
                 css={css`
-                  background: ${theme.colors.primary};
-                  color: white;
-                  font-weight: bold;
-                  border-radius: 0px 5px 5px 0px;
-                  border: solid 1px ${theme.colors.primary};
-                  margin-left: -1em;
-                  ${'' /* width: 100px; */}
-                  flex-basis: auto;
-                  padding: 0.25em 2em;
+                  display: flex;
+                  justify-content: center;
                 `}
               >
-                Sign Up
-              </button>
-            </div>
-          </Form>
-        </Box>
-        <Box>
-          <LogoContainer>
-            <Logo />
-          </LogoContainer>
-        </Box>
-      </DialogContent>
-    </Dialog>
+                <Input
+                  type="email"
+                  required
+                  placeholder="Your Email"
+                  name="email"
+                  id="email"
+                  value={userEmail.email}
+                  onChange={handleEmailChange}
+                />
+                <button
+                  type="submit"
+                  css={css`
+                    background: ${theme.colors.primary};
+                    color: white;
+                    font-weight: bold;
+                    border-radius: 0px 5px 5px 0px;
+                    border: solid 1px ${theme.colors.primary};
+                    margin-left: -1em;
+                    ${'' /* width: 100px; */}
+                    flex-basis: auto;
+                    padding: 0.25em 2em;
+                  `}
+                >
+                  Sign Up
+                </button>
+              </div>
+            </Form>
+          </Box>
+          <Box>
+            <LogoContainer>
+              <Logo />
+            </LogoContainer>
+          </Box>
+        </DialogContent>
+      </Dialog>
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        autoHideDuration={3000}
+        key="bottom-center"
+        open={props.showSnackbar}
+        onClose={props.handleSnackbar}
+        message={<span id="message-id">{props.snackbarMessage}</span>}
+      />
+    </React.Fragment>
   )
 })
 

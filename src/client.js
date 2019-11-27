@@ -1,6 +1,7 @@
 // All API calls
 
 import axios from 'axios'
+import _ from 'lodash'
 
 import Conf from './config'
 
@@ -40,7 +41,9 @@ const resolvePost = async (...args) => {
     }
     return response
   } catch (error) {
-    console.log('Error in API calling', error)
+    if (_.has(error, 'response.data')) {
+      return error.response.data
+    }
     return null
   }
 }
