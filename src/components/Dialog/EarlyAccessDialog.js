@@ -10,7 +10,7 @@ import Box from '@material-ui/core/Box'
 import styled from '@emotion/styled'
 import { jsx, css } from '@emotion/core'
 
-import IMG from '../IMG'
+import IMG from '../../common/IMG'
 import { ReactComponent as Logo } from '../../assets/img/logo.svg'
 import EarlyAccessHeader from '../../assets/img/early-access-header.png'
 import { landingBps } from '../../utils/responsive'

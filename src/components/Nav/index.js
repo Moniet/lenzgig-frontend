@@ -9,8 +9,8 @@ import Button from '../../common/Button'
 
 import { ReactComponent as HamburgerIcon } from '../../assets/img/hamburger.svg'
 import { landingBps } from '../../utils/responsive'
-import { EarlyAccessDialog } from '../../common/Dialog/EarlyAccessDialog'
-import { StartSurveyDialog } from '../../common/Dialog/StartSurveyDialog'
+import { EarlyAccessDialog } from '../Dialog/EarlyAccessDialog'
+import { StartSurveyDialog } from '../Dialog/StartSurveyDialog'
 import { User } from '../../containers/appAction';
 
 const Container = styled.div`

@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import { jsx, css } from '@emotion/core'
 
-import IMG from '../IMG'
+import IMG from '../../common/IMG'
 import StartSurveyHeader from '../../assets/img/start-survey-header.png'
 import { landingBps } from '../../utils/responsive'
 

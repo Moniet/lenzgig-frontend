@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import { jsx, css, keyframes } from '@emotion/core'
 import { useTheme } from 'emotion-theming'
@@ -20,6 +20,7 @@ import person1 from '../../assets/img/person-1.png'
 import person2 from '../../assets/img/person-2.png'
 import person3 from '../../assets/img/person-3.png'
 import { landingBps } from '../../utils/responsive'
+import { User } from '../../containers/appAction';
 
 const Container = styled.div`
   position: relative;
@@ -187,9 +188,48 @@ const H2 = styled.h2`
 
 export default () => {
   const theme = useTheme()
-  function handleSignUp() {
-    // alert('test')
+  const [userEmailA, setUserEmailA] = useState({ email: '' })
+  const [userEmailB, setUserEmailB] = useState({ email: '' })
+  const [userEmailC, setUserEmailC] = useState({ email: '' })
+
+  const handleEmailChange = (e, index) => {
+    switch (index) {
+      case 0:
+        setUserEmailA({ email: e.target.value })
+        break
+      case 1:
+        setUserEmailB({ email: e.target.value })
+        break
+      case 2:
+        setUserEmailC({ email: e.target.value })
+        break
+    }
   }
+
+  const handleSignUp = event => {
+    event.preventDefault()
+    const target = event.target
+    let formValue = {}
+
+    for (let i = 0; i < target.elements.length - 1; i++) {
+      let id = target.elements[i].id,
+        value = target.elements[i].value
+      formValue[id] = value
+    }
+    console.log('home page signup value', formValue)
+    handleStartSurvey(formValue);
+  }
+
+  const handleStartSurvey = async (userObject = {}) => {
+    const userData = await User.signUp(userObject);
+    console.log("signup successfull", userObject, userData);
+    if (!userData) {
+      console.log('signup error occured');
+    } else {
+      console.log('No error occured', userData);
+    }
+  }
+
   useEffect(() => {
     let dude = document.querySelector('#dude-man')
     dude.style.animation = `float 1.5s ease-in-out alternate infinite`
@@ -234,6 +274,7 @@ export default () => {
                         display: none;
                       }
                     `}
+                    onSubmit={handleSignUp}
                   >
                     <label>Want to get early access to our platform?</label>
                     <div
@@ -247,8 +288,15 @@ export default () => {
                         }
                       `}
                     >
-                      <Input placeholder="Your Email" />
+                      <Input
+                        placeholder="Your Email"
+                        name="email"
+                        id="email"
+                        value={userEmailA.email}
+                        onChange={e => handleEmailChange(e, 0)}
+                      />
                       <button
+                        type="submit"
                         css={css`
                           background: ${theme.colors.primary};
                           color: white;
@@ -308,6 +356,7 @@ export default () => {
                     text-align: center;
                   }
                 `}
+                onSubmit={handleSignUp}
               >
                 <label>Want to get early access to our platform?</label>
                 <div
@@ -321,8 +370,15 @@ export default () => {
                     }
                   `}
                 >
-                  <Input placeholder="Your Email" />
+                  <Input
+                    placeholder="Your Email"
+                    name="email"
+                    id="email"
+                    value={userEmailB.email}
+                    onChange={e => handleEmailChange(e, 1)}
+                  />
                   <button
+                    type="submit"
                     css={css`
                       background: ${theme.colors.primary};
                       color: white;
@@ -520,14 +576,24 @@ export default () => {
                 margin-top: 2em;
               }
             `}
+            onSubmit={handleSignUp}
           >
             <Flex
               css={css`
                 color: white;
               `}
             >
-              <Input type="text" placeholder="Your Email" negative />
+              <Input
+                type="text"
+                placeholder="Your Email"
+                negative
+                name="email"
+                id="email"
+                value={userEmailC.email}
+                onChange={e => handleEmailChange(e, 2)}
+              />
               <button
+                type="submit"
                 css={css`
                   min-width: 100px;
                   ${'' /* padding: 1em 2em; */}
