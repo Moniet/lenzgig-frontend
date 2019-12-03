@@ -105,8 +105,8 @@ const EarlyAccessDialog = withStyles(styles)(props => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    const target = event.target;
-    let formValue = {};
+    const target = event.target
+    let formValue = {}
 
     for (let i = 0; i < target.elements.length - 1; i++) {
       let id = target.elements[i].id,
@@ -114,7 +114,7 @@ const EarlyAccessDialog = withStyles(styles)(props => {
       formValue[id] = value
     }
 
-    props.handleStartSurvey(formValue);
+    props.handleStartSurvey(formValue)
   }
 
   return (
