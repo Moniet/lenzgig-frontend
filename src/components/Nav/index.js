@@ -159,20 +159,13 @@ export default () => {
   const [showStartSurveyDialog, setStartSurveyDialog] = useState(false)
 
   const handleScroll = e => {
-    if (window.scrollY > 1) {
-      setFixed(true)
-    } else {
-      setFixed(false)
-    }
+    if (window.scrollY > 1) setFixed(true)
+    else setFixed(false)
   }
 
-  const handleClick = () => {
-    setShowDropdown(!showDropdown)
-  }
+  const handleClick = () => setShowDropdown(!showDropdown)
 
-  const handleEarlyAccessDialog = () => {
-    setEarlyAccessDialog(!showDialog)
-  }
+  const handleEarlyAccessDialog = () => setEarlyAccessDialog(!showDialog)
 
   const handleStartSurveyDialog = () => {
     setEarlyAccessDialog(false)
@@ -190,13 +183,14 @@ export default () => {
   }
 
   useEffect(() => {
+    let root = document.querySelector('.root')
+    root.addEventListener('click', () =>
+      showDropdown ? setShowDropdown(false) : null
+    )
     //get body
     // add resize event listener
     // boundingRect, if it is lesser than X then don't show else dont show
 
-    let root = document.querySelector('.app')
-
-    root.addEventListener('click', () => setShowDropdown(false))
     // let bodySize = body.getBoundingClientRect().width
 
     // if (bodySize < 1125) {
