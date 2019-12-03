@@ -181,12 +181,8 @@ const Card = styled.div`
   text-align: center;
   ${'' /* margin: 0 1em; */}
 
-  &:first-of-type {
-    margin-left: 1em;
-  }
-
-  &:last-of-type {
-    margin-right: 1em;
+  ${landingBps[2]} {
+    padding: 1em;
   }
 
   h3 {
@@ -443,7 +439,7 @@ export default () => {
                   }
                 }
                 ${landingBps[2]} {
-                  font-size: 0.75em;
+                  font-size: 0.8em;
                   justify-content: space-between;
                   & > * {
                     margin-top: 1em;
