@@ -56,12 +56,16 @@ const Intro = styled.div`
   margin: 12em 0 0 0;
   height: calc(100vh - 12em);
 
-  ${landingBps[2]} {
-    margin: 5em 0 1em;
+  ${landingBps[1]} {
+    margin: 8em 0 0em;
+    height: 100%;
+    margin-bottom: -4em;
   }
 
-  ${landingBps[1]} {
-    margin: 8em 0 1em;
+  ${landingBps[2]} {
+    margin: 5em 0 1em;
+    height: 100%;
+    margin-bottom: 0;
   }
 `
 
@@ -434,11 +438,12 @@ export default () => {
                   padding: 0;
                   font-size: 1.25em;
 
-                  ${landingBps[2]} {
-                    font-size: 1em;
+                  ${landingBps[1]} {
+                    font-size: 0.75em;
                   }
                 }
                 ${landingBps[2]} {
+                  font-size: 0.75em;
                   justify-content: space-between;
                   & > * {
                     margin-top: 1em;
@@ -610,18 +615,16 @@ export default () => {
         </Flex>
         <div
           css={css`
-            width: calc(100% + 8rem);
-            margin-left: -4rem;
+            width: 100%;
             background: white;
             padding: 4em;
-            margin-top: 4em;
+            margin-top: 1em;
             svg {
               max-width: 250px;
               margin: 0 auto;
             }
             ${landingBps[1]} {
               width: 100%;
-              margin-top: 2em;
               padding: 2em 4em;
             }
           `}
@@ -629,7 +632,7 @@ export default () => {
           <div
             css={css`
               max-width: 1000px;
-              margin: 0 auto;
+              margin: 0 2em;
             `}
           >
             <Logo />
