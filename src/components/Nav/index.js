@@ -11,7 +11,7 @@ import { ReactComponent as HamburgerIcon } from '../../assets/img/hamburger.svg'
 import { landingBps } from '../../utils/responsive'
 import { EarlyAccessDialog } from '../../common/Dialog/EarlyAccessDialog'
 import { StartSurveyDialog } from '../../common/Dialog/StartSurveyDialog'
-import { User } from '../../containers/appAction';
+import { User } from '../../containers/appAction'
 
 const Container = styled.div`
   position: relative;
@@ -175,17 +175,17 @@ export default () => {
   }
 
   const handleStartSurveyDialog = () => {
-    setEarlyAccessDialog(false);
-    setStartSurveyDialog(!showStartSurveyDialog);
+    setEarlyAccessDialog(false)
+    setStartSurveyDialog(!showStartSurveyDialog)
   }
 
   const handleStartSurvey = async (userObject = {}) => {
-    const userData = await User.signUp(userObject);
-    console.log("signup successfull", userObject, userData);
+    const userData = await User.signUp(userObject)
+    console.log('signup successfull', userObject, userData)
     if (!userData) {
-      console.log('signup error occured');
+      console.log('signup error occured')
     } else {
-      handleStartSurveyDialog();
+      handleStartSurveyDialog()
     }
   }
 
@@ -194,7 +194,9 @@ export default () => {
     // add resize event listener
     // boundingRect, if it is lesser than X then don't show else dont show
 
-    // let body = document.querySelector('body')
+    let root = document.querySelector('.app')
+
+    root.addEventListener('click', () => setShowDropdown(false))
     // let bodySize = body.getBoundingClientRect().width
 
     // if (bodySize < 1125) {
