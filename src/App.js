@@ -27,7 +27,9 @@ function App() {
         <Global />
         <Router>
           <Nav />
-          <Route path="/" component={Landing} />
+          <div className="root">
+            <Route path="/" component={Landing} />
+          </div>
         </Router>
       </div>
     </ThemeProvider>

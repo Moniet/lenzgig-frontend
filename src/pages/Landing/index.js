@@ -25,18 +25,26 @@ import { landingBps } from '../../utils/responsive'
 import { StartSurveyDialog } from '../../components/Dialog/StartSurveyDialog'
 import { handleSignUp, handleStartSurvey } from '../../utils/commonFunction'
 
+const Gutter = styled.div`
+  display: block;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  padding: 0 2em;
+`
+
 const Container = styled.div`
   position: relative;
   display: block;
-  max-width: 1100px;
+  width: 100vw;
   min-height: 100vh;
   margin: 0 auto;
   overflow: visible;
-  padding: 0 2em;
 
   & > * {
     margin-bottom: 4em;
   }
+
   ${landingBps[0]} {
     width: 100%;
   }
@@ -49,10 +57,19 @@ const Container = styled.div`
 `
 
 const Intro = styled.div`
-  margin: 12em 0;
+  margin: 12em 0 0 0;
+  height: calc(100vh - 12em);
+
+  ${landingBps[1]} {
+    margin: 8em 0 0em;
+    height: 100%;
+    margin-bottom: -4em;
+  }
 
   ${landingBps[2]} {
     margin: 5em 0 1em;
+    height: 100%;
+    margin-bottom: 0;
   }
 `
 
@@ -61,20 +78,24 @@ const Half = styled.div`
   flex: 1 0 50%;
   width: 50%;
 
-  ${landingBps[0]} {
-    width: 100%;
+  ${landingBps[1]} {
+    flex: 1 0 100%;
   }
 `
 
 const Onboarding = styled.div`
   overflow: visible;
   white-space: nowrap;
+  text-align: center;
+  margin-right: -200px;
+  margin-top: -50px;
   
   }
   h4,
   h6 {
     color: #484848;
     width: 500px;
+    text-align: center;
   }
   h4 {
     font-size: 1.25em;
@@ -86,13 +107,11 @@ const Onboarding = styled.div`
       font-size: 0.75em;
     }
   }
-              
-
 
      ${landingBps[1]} {
     white-space: normal;
     overflow: hidden;
-
+    max-width: 100%;
   }
 `
 
@@ -139,7 +158,6 @@ const Icon = styled.span`
 const Form = styled.form`
   position: relative;
   margin: 0 auto;
-  text-align: left;
   min-width: 100%;
   margin-top: 4em;
 
@@ -165,6 +183,11 @@ const Card = styled.div`
   max-width: 250px;
   min-width: 200px;
   text-align: center;
+  ${'' /* margin: 0 1em; */}
+
+  ${landingBps[2]} {
+    padding: 1em;
+  }
 
   h3 {
     font-weight: bold;
@@ -180,9 +203,13 @@ const Card = styled.div`
 const H2 = styled.h2`
   font-weight: 900;
   color: #333;
-  font-size: 3.25em;
+  font-size: 3.5em;
   margin-bottom: 0.5em;
   text-align: center;
+
+  ${landingBps[1]} {
+    font-size: 3rem;
+  }
 
   ${landingBps[2]} {
     font-size: 1.75rem;
@@ -243,7 +270,13 @@ export default () => {
     <>
       <Container>
         <Intro>
-          <Flex justifyLeft alignTop>
+          <div
+            css={css`
+              display: flex;
+              flex-flow: row wrap;
+              align-items: flex-start;
+            `}
+          >
             <Half>
               <Onboarding>
                 <H2>
@@ -255,10 +288,8 @@ export default () => {
                   css={css`
                     display: flex;
                     flex-direction: column;
-                    align-items: flex-start;
-                    width: 70%;
-                    margin: 0 auto;
-                    text-align: left;
+                    align-items: center;
+                    text-align: center;
 
                     ${landingBps[0]} {
                       align-items: center;
@@ -270,6 +301,8 @@ export default () => {
                   <h4>You Create! We'll Handle The Rest</h4>
                   <Form
                     css={css`
+                      width: 100%;
+                      text-align: center;
                       ${landingBps[0]} {
                         text-align: center;
                       }
@@ -284,7 +317,8 @@ export default () => {
                     <div
                       css={css`
                         display: flex;
-                        justify-content: flex-start;
+                        justify-content: center;
+                        text-align: center;
                         margin-top: 1em;
 
                         ${landingBps[0]} {
@@ -336,16 +370,21 @@ export default () => {
                 css={css`
                   position: absolute;
                   top: -20vh;
-                  right: calc(-1 * (49vw - 500px));
+                  right: 0;
                   width: 850px;
                   max-width: 180%;
                   z-index: -1;
-                  ${landingBps[1]} {
+                  ${landingBps[0]} {
                     min-width: 500px;
                     max-width: 500px;
-                    top: 0;
-                    right: -2em;
+                    top: 1em;
+                    ${'' /* right: -2em; */}
                     width: 100%;
+                  }
+
+                  ${landingBps[2]} {
+                    min-width: 80%;
+                    max-width: 100%;
                   }
                 `}
               />
@@ -357,8 +396,14 @@ export default () => {
                   display: none;
 
                   ${landingBps[1]} {
+                    text-align: center;
                     display: block;
                     margin-top: 15em;
+                  }
+
+                  ${landingBps[2]} {
+                    display: block;
+                    margin-top: 8em;
                     text-align: center;
                   }
                 `}
@@ -404,108 +449,123 @@ export default () => {
                 </div>
               </Form>
             </Half>
-          </Flex>
+          </div>
         </Intro>
-        <Flex direction={'column'}>
-          <h3
-            css={css`
-              font-weight: 700;
-              font-size: 2em;
-
-              ${landingBps[2]} {
-                font-size: 1.15em;
-                text-align: center;
-              }
-            `}
-          >
-            An AR community for everyone.
-          </h3>
-          <p
-            css={css`
-              font-size: 1.25rem;
-              margin-bottom: 1em;
-
-              ${landingBps[2]} {
-                font-size: 1em;
-                text-align: center;
-              }
-            `}
-          >
-            Lenzgig is open to any platform, whether you are a creator for
-          </p>
-          <Flex
-            css={css`
-              h4 {
+        <Gutter
+          css={css`
+            ${landingBps[1]} {
+              margin-top: 4em;
+            }
+            ${landingBps[2]} {
+              margin: 0;
+            }
+          `}
+        >
+          <Flex direction={'column'}>
+            <h3
+              css={css`
                 font-weight: 700;
-                margin: 0 1em 0 0;
-                padding: 0;
-                font-size: 1.25em;
+                font-size: 2em;
+
+                ${landingBps[2]} {
+                  font-size: 1.15em;
+                  text-align: center;
+                  margin: 0;
+                  margin-top: 2.5em;
+                }
+              `}
+            >
+              An AR community for everyone.
+            </h3>
+            <p
+              css={css`
+                font-size: 1.25rem;
+                margin-bottom: 1em;
 
                 ${landingBps[2]} {
                   font-size: 1em;
+                  text-align: center;
                 }
-              }
-              ${landingBps[2]} {
-                justify-content: space-between;
-                & > * {
-                  margin-top: 1em;
-                }
-              }
+              `}
+            >
+              Lenzgig is open to any platform, whether you are a creator for
+            </p>
+            <Flex
+              css={css`
+                h4 {
+                  font-weight: 700;
+                  margin: 0 1em 0 0;
+                  padding: 0;
+                  font-size: 1.25em;
 
-              display: flex;
-            `}
-          >
-            <Flex direction={'row'} justifyLeft>
-              <Icon>
-                <img src={instagram} alt="" />
-              </Icon>
-              <h4>Instagram</h4>
+                  ${landingBps[1]} {
+                    font-size: 0.75em;
+                  }
+                }
+                ${landingBps[2]} {
+                  font-size: 0.8em;
+                  justify-content: space-between;
+                  & > * {
+                    margin-top: 1em;
+                  }
+                }
+
+                display: flex;
+              `}
+            >
+              <Flex direction={'row'} justifyLeft>
+                <Icon>
+                  <img src={instagram} alt="" />
+                </Icon>
+                <h4>Instagram</h4>
+              </Flex>
+              <Flex direction={'row'} align-center>
+                <Icon>
+                  <IMG src={snapchat} alt="" />
+                </Icon>
+                <h4>Snapchat</h4>
+              </Flex>
+              <Flex direction={'row'} align-center>
+                <Icon>
+                  <img src={facebook} alt="" />
+                </Icon>
+                <h4>Facebook</h4>
+              </Flex>
+              <Flex direction={'row'} align-center>
+                <Icon>
+                  <img src={shopify} alt="" />
+                </Icon>
+                <h4>Shopify</h4>
+              </Flex>
             </Flex>
-            <Flex direction={'row'} align-center>
-              <Icon>
-                <IMG src={snapchat} alt="" />
-              </Icon>
-              <h4>Snapchat</h4>
-            </Flex>
-            <Flex direction={'row'} align-center>
-              <Icon>
-                <img src={facebook} alt="" />
-              </Icon>
-              <h4>Facebook</h4>
-            </Flex>
-            <Flex direction={'row'} align-center>
-              <Icon>
-                <img src={shopify} alt="" />
-              </Icon>
-              <h4>Shopify</h4>
-            </Flex>
+            <p
+              css={css`
+                font-size: 1.25em;
+                margin-top: 1.25em;
+                font-weight: 500;
+                width: calc(60% + 5vh);
+                text-align: center;
+
+                ${landingBps[2]} {
+                  font-size: 0.75em;
+                  text-align: justify;
+                  width: 100%;
+                }
+              `}
+            >
+              LenzGig gives you everything you need to grow your clientele and
+              expand your skills.
+            </p>
           </Flex>
-          <p
-            css={css`
-              font-size: 1.25em;
-              margin-top: 1.25em;
-              font-weight: 500;
-              width: calc(60% + 5vh);
-              text-align: center;
-
-              ${landingBps[2]} {
-                font-size: 0.75em;
-                text-align: justify;
-                width: 100%;
-              }
-            `}
-          >
-            LenzGig gives you everything you need to grow your clientele and
-            expand your skills.
-          </p>
-        </Flex>
+        </Gutter>
         <div
           css={css`
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            margin-top: 2em;
-            grid-gap: 2em;
+            grid-gap: 1em;
             overflow-x: scroll;
+            max-width: 1000px;
+            margin: 2em auto 0 auto;
           `}
         >
           <Card>
@@ -549,22 +609,21 @@ export default () => {
       </Container>
       <footer
         css={css`
-          padding: 4em 4em 0;
           width: 100vw;
-          background: linear-gradient(to right, #8d48ff, #77bbff);
-          margin-top: 4em;
-
-          ${landingBps[2]} {
-            padding: 2em 2em 0;
-            margin-top: 2em;
-          }
+          margin-top: 2em;
 
           & ::placeholder {
             color: white;
           }
         `}
       >
-        <Flex direction={'column'}>
+        <Flex
+          direction={'column'}
+          css={css`
+            background: linear-gradient(to right, #8d48ff, #77bbff);
+            padding: 4em 2em;
+          `}
+        >
           <H2
             css={css`
               font-weight: 900;
@@ -627,19 +686,16 @@ export default () => {
         </Flex>
         <div
           css={css`
-            width: calc(100% + 8rem);
-            margin-left: -4rem;
+            width: 100%;
             background: white;
             padding: 4em;
-            margin-top: 4em;
+            margin-top: 1em;
             svg {
               max-width: 250px;
               margin: 0 auto;
             }
             ${landingBps[1]} {
-              width: calc(100% + 4rem);
-              margin-left: -2em;
-              margin-top: 2em;
+              width: 100%;
               padding: 2em 4em;
             }
           `}
@@ -647,7 +703,7 @@ export default () => {
           <div
             css={css`
               max-width: 1000px;
-              margin: 0 auto;
+              margin: 0 2em;
             `}
           >
             <Logo />

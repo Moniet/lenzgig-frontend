@@ -13,6 +13,7 @@ import { landingBps } from '../../utils/responsive'
 import { EarlyAccessDialog } from '../Dialog/EarlyAccessDialog'
 import { StartSurveyDialog } from '../Dialog/StartSurveyDialog'
 import { handleStartSurvey } from '../../utils/commonFunction'
+import { User } from '../../containers/appAction'
 
 const Container = styled.div`
   position: relative;
@@ -162,25 +163,17 @@ export default () => {
   const [snackbarMessage, setSnackbarMessage] = useState('')
 
   const handleScroll = e => {
-    if (window.scrollY > 1) {
-      setFixed(true)
-    } else {
-      setFixed(false)
-    }
+    if (window.scrollY > 1) setFixed(true)
+    else setFixed(false)
   }
 
   const handleSnackbar = () => {
     setShowSnackbar(!showSnackbar)
     setSnackbarMessage('');
   }
+  const handleClick = () => setShowDropdown(!showDropdown)
 
-  const handleClick = () => {
-    setShowDropdown(!showDropdown)
-  }
-
-  const handleEarlyAccessDialog = () => {
-    setEarlyAccessDialog(!showDialog)
-  }
+  const handleEarlyAccessDialog = () => setEarlyAccessDialog(!showDialog)
 
   const handleStartSurveyDialog = () => {
     setEarlyAccessDialog(false)
@@ -200,11 +193,14 @@ export default () => {
   }
 
   useEffect(() => {
+    let root = document.querySelector('.root')
+    root.addEventListener('click', () =>
+      showDropdown ? setShowDropdown(false) : null
+    )
     //get body
     // add resize event listener
     // boundingRect, if it is lesser than X then don't show else dont show
 
-    // let body = document.querySelector('body')
     // let bodySize = body.getBoundingClientRect().width
 
     // if (bodySize < 1125) {
