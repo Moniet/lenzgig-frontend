@@ -280,9 +280,9 @@ export default () => {
             <Half>
               <Onboarding>
                 <H2>
-                  Create AR & VR For
+                  Create AR For The
                   <br />
-                  The Coolest Brands
+                  Coolest Brands
                 </H2>
                 <div
                   css={css`
