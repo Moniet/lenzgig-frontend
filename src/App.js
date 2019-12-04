@@ -11,12 +11,12 @@ import { User } from './containers/appAction'
 
 function App() {
   // Adding GA through npm in production mode
-  if (process.env.NODE_ENV === 'production') {
-    ReactGA.initialize(process.env.REACT_APP_GA_KEY, {
-      // debug: true,
-      titleCase: false
-    })
-  }
+  // if (process.env.NODE_ENV === 'production') {
+  //   ReactGA.initialize(process.env.REACT_APP_GA_KEY, {
+  //     // debug: true,
+  //     titleCase: false
+  //   })
+  // }
   // When link is shared and clicked
   User.inviteLoad()
 
