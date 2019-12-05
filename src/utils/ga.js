@@ -18,4 +18,14 @@ const GA = {
   }
 }
 
-export { GA }
+const GTM = {
+  click: function(event = '', action = '', label = '') {
+    window.dataLayer.push({
+      event,
+      action,
+      label
+    })
+  }
+}
+
+export { GA, GTM }

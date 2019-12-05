@@ -14,6 +14,7 @@ import { EarlyAccessDialog } from '../Dialog/EarlyAccessDialog'
 import { StartSurveyDialog } from '../Dialog/StartSurveyDialog'
 import { handleStartSurvey } from '../../utils/commonFunction'
 import { User } from '../../containers/appAction'
+import { GTM } from '../../utils/ga'
 
 const Container = styled.div`
   position: relative;
@@ -173,7 +174,11 @@ export default () => {
   }
   const handleClick = () => setShowDropdown(!showDropdown)
 
-  const handleEarlyAccessDialog = () => setEarlyAccessDialog(!showDialog)
+  const handleEarlyAccessDialog = () => {
+    console.log("aaaaa")
+    GTM.click('click', 'early-access', 'Header early access click')
+    setEarlyAccessDialog(!showDialog)
+  }
 
   const handleStartSurveyDialog = () => {
     setEarlyAccessDialog(false)
