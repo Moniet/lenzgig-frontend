@@ -57,7 +57,7 @@ const Container = styled.div`
 `
 
 const Intro = styled.div`
-  margin: 12em 0;
+  margin: 12em 0 14em;
   ${'' /* height: calc(100vh - 12em); */}
 
   ${landingBps[1]} {
@@ -129,7 +129,7 @@ const Input = styled.input`
   width: 100%;
   max-width: 260px;
   min-width: 200px;
-  flex: 1 1 0;
+  flex: 1 0 0;
 `
 
 const float = keyframes`
@@ -344,14 +344,13 @@ export default () => {
                           background: ${theme.colors.primary};
                           color: white;
                           font-weight: bold;
-                          font-size: 0.8em;
                           border-radius: 0px 5px 5px 0px;
                           border: solid 1px ${theme.colors.primary};
                           margin-left: -1em;
-                          ${'' /* width: 100px; */}
                           height: 3.5em;
                           flex-basis: auto;
                           padding: 0.25em 2em;
+                          font-size: 0.8em;
                         `}
                       >
                         Sign Up
@@ -415,15 +414,10 @@ export default () => {
                 onSubmit={handleFormSubmit}
               >
                 <label>Want to get early access to our platform?</label>
-                <div
+                <Flex
                   css={css`
-                    display: flex;
-                    justify-content: flex-start;
+                    color: white;
                     margin-top: 1em;
-
-                    ${landingBps[0]} {
-                      justify-content: center;
-                    }
                   `}
                 >
                   <Input
@@ -448,11 +442,12 @@ export default () => {
                       ${'' /* width: 100px; */}
                       flex-basis: auto;
                       padding: 0.25em 2em;
+                      font-size: 0.8em;
                     `}
                   >
                     Sign Up
                   </button>
-                </div>
+                </Flex>
               </Form>
             </Half>
           </div>
@@ -677,11 +672,10 @@ export default () => {
                   border-radius: 0px 5px 5px 0px;
                   border: solid 1px white;
                   margin-left: -1em;
-                  ${'' /* width: 100px; */}
                   height: 3.5em;
                   flex-basis: auto;
                   padding: 0.25em 2em;
-                `}
+-                `}
               >
                 Sign up
               </button>
