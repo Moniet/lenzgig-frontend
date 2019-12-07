@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { useTheme } from 'emotion-theming'
 import Button from '../../common/Button'
 import { has } from 'lodash'
+import CloseIcon from '@material-ui/icons/Close'
 
 import { ReactComponent as HamburgerIcon } from '../../assets/img/hamburger.svg'
 import { landingBps } from '../../utils/responsive'
@@ -163,8 +164,6 @@ export default () => {
   const [showSnackbar, setShowSnackbar] = useState(false)
   const [snackbarMessage, setSnackbarMessage] = useState('')
 
-  console.log(showDropdown)
-
   const handleScroll = e => {
     if (window.scrollY > 1) setFixed(true)
     else setFixed(false)
@@ -177,7 +176,7 @@ export default () => {
   const handleClick = () => setShowDropdown(!showDropdown)
 
   const handleEarlyAccessDialog = () => {
-    setShowDropdown(!showDropdown)
+    setShowDropdown(false)
     console.log('aaaaa')
     GTM.click('click', 'early-access', 'Header early access click')
     setEarlyAccessDialog(!showDialog)
@@ -257,7 +256,8 @@ export default () => {
           </NavList>
 
           <Hamburger onClick={e => handleClick()}>
-            <HamburgerIcon />
+            {!showDropdown && <HamburgerIcon />}
+            {showDropdown && <CloseIcon />}
           </Hamburger>
 
           <EarlyAccessDialog
