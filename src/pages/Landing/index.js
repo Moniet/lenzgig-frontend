@@ -84,6 +84,7 @@ const Half = styled.div`
 `
 
 const Onboarding = styled.div`
+  position: relative;
   overflow: visible;
   white-space: nowrap;
   text-align: center;
@@ -122,7 +123,7 @@ const Input = styled.input`
   font-weight: 600;
   background: transparent;
   padding: 1em;
-  max-height: 4em;
+  height: 3.5em;
   outline: none;
   font-size: 0.8em;
   width: 100%;
@@ -180,12 +181,14 @@ const CardIMG = styled.div`
 
 const Card = styled.div`
   flex-basis: 1;
-  max-width: 250px;
-  min-width: 200px;
+  width: 250px;
   text-align: center;
   ${'' /* margin: 0 1em; */}
 
   ${landingBps[2]} {
+    padding: 1em;
+  }
+  ${landingBps[1]} {
     padding: 1em;
   }
 
@@ -247,14 +250,14 @@ export default () => {
       setStartSurveyDialog(!showStartSurveyDialog)
     } else {
       console.log('Not successfull', userData)
-      setSnackbarMessage(userData.error.message);
+      setSnackbarMessage(userData.error.message)
       setShowSnackbar(!showSnackbar)
     }
   }
 
   const handleSnackbar = () => {
     setShowSnackbar(!showSnackbar)
-    setSnackbarMessage('');
+    setSnackbarMessage('')
   }
 
   const handleStartSurveyDialog = () => {
@@ -345,6 +348,7 @@ export default () => {
                           border: solid 1px ${theme.colors.primary};
                           margin-left: -1em;
                           ${'' /* width: 100px; */}
+                          height: 3.5em;
                           flex-basis: auto;
                           padding: 0.25em 2em;
                         `}
@@ -439,6 +443,7 @@ export default () => {
                       border-radius: 0px 5px 5px 0px;
                       border: solid 1px ${theme.colors.primary};
                       margin-left: -1em;
+                      height: 3.5em;
                       ${'' /* width: 100px; */}
                       flex-basis: auto;
                       padding: 0.25em 2em;
@@ -566,6 +571,7 @@ export default () => {
             overflow-x: scroll;
             max-width: 1000px;
             margin: 2em auto 0 auto;
+            justify-items: center;
           `}
         >
           <Card>
@@ -575,9 +581,9 @@ export default () => {
               </CardIMG>
               <h3>Find Opportunity</h3>
               <p>
-                Work on augmented realityprojects for some of the top companies,
-                influencers, & brands. Find projects ranging from creating
-                Filters and Lenses to AR Commerce and AR Ads
+                Work on augmented reality projects for some of the top
+                companies, influencers, & brands. Find projects ranging from
+                creating Filters and Lenses to AR Commerce and AR Ads
               </p>
             </Flex>
           </Card>
