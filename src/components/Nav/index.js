@@ -163,6 +163,8 @@ export default () => {
   const [showSnackbar, setShowSnackbar] = useState(false)
   const [snackbarMessage, setSnackbarMessage] = useState('')
 
+  console.log(showDropdown)
+
   const handleScroll = e => {
     if (window.scrollY > 1) setFixed(true)
     else setFixed(false)
@@ -170,12 +172,13 @@ export default () => {
 
   const handleSnackbar = () => {
     setShowSnackbar(!showSnackbar)
-    setSnackbarMessage('');
+    setSnackbarMessage('')
   }
   const handleClick = () => setShowDropdown(!showDropdown)
 
   const handleEarlyAccessDialog = () => {
-    console.log("aaaaa")
+    setShowDropdown(!showDropdown)
+    console.log('aaaaa')
     GTM.click('click', 'early-access', 'Header early access click')
     setEarlyAccessDialog(!showDialog)
   }
@@ -192,7 +195,7 @@ export default () => {
       handleStartSurveyDialog()
     } else {
       console.log('signup error occured', userData)
-      setSnackbarMessage(userData.error.message);
+      setSnackbarMessage(userData.error.message)
       setShowSnackbar(!showSnackbar)
     }
   }
@@ -202,18 +205,18 @@ export default () => {
     root.addEventListener('click', () =>
       showDropdown ? setShowDropdown(false) : null
     )
-    //get body
+    // get body
     // add resize event listener
     // boundingRect, if it is lesser than X then don't show else dont show
 
-    // let bodySize = body.getBoundingClientRect().width
+    let bodySize = root.getBoundingClientRect().width
 
-    // if (bodySize < 1125) {
-    //   if (dropdown.current) {
-    //     if (showDropdown) dropdown.current.style.transform = 'scale(1)'
-    //     else dropdown.current.style.transform = 'scale(0)'
-    //   }
-    // }
+    if (bodySize < 1125) {
+      if (dropdown.current) {
+        if (showDropdown) dropdown.current.style.transform = 'scale(1)'
+        else dropdown.current.style.transform = 'scale(0)'
+      }
+    }
 
     window.addEventListener('scroll', handleScroll)
   }, [dropdown, fixed, showDropdown, showDialog, showStartSurveyDialog])
