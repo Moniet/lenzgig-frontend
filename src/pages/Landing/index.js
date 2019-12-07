@@ -58,7 +58,7 @@ const Container = styled.div`
 `
 
 const Intro = styled.div`
-  margin: 12em 0 14em;
+  margin: 12em 0 15em;
   ${'' /* height: calc(100vh - 12em); */}
 
   ${landingBps[1]} {
