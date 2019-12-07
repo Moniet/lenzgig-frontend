@@ -24,6 +24,7 @@ import person3 from '../../assets/img/person-3.png'
 import { landingBps } from '../../utils/responsive'
 import { StartSurveyDialog } from '../../components/Dialog/StartSurveyDialog'
 import { handleSignUp, handleStartSurvey } from '../../utils/commonFunction'
+import TypeAnimation from '../../components/TypeAnimation'
 
 const Gutter = styled.div`
   display: block;
@@ -285,7 +286,7 @@ export default () => {
                 <H2>
                   Create AR For The
                   <br />
-                  Coolest Brands
+                  Coolest <TypeAnimation />
                 </H2>
                 <div
                   css={css`
