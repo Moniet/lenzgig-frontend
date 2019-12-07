@@ -57,8 +57,8 @@ const Container = styled.div`
 `
 
 const Intro = styled.div`
-  margin: 12em 0 0 0;
-  height: calc(100vh - 12em);
+  margin: 12em 0;
+  ${'' /* height: calc(100vh - 12em); */}
 
   ${landingBps[1]} {
     margin: 8em 0 0em;
@@ -344,6 +344,7 @@ export default () => {
                           background: ${theme.colors.primary};
                           color: white;
                           font-weight: bold;
+                          font-size: 0.8em;
                           border-radius: 0px 5px 5px 0px;
                           border: solid 1px ${theme.colors.primary};
                           margin-left: -1em;
@@ -669,20 +670,17 @@ export default () => {
               <button
                 type="submit"
                 css={css`
-                  min-width: 100px;
-                  ${'' /* padding: 1em 2em; */}
                   background: white;
-                  font-weight: bold;
-                  border-radius: 0 5px 5px 0;
                   color: #634ef9;
-                  padding: 0.5em;
-                  border: none;
-                  padding: 0.708em 0;
+                  font-weight: bold;
+                  font-size: 0.8em;
+                  border-radius: 0px 5px 5px 0px;
+                  border: solid 1px white;
                   margin-left: -1em;
-
-                  ${landingBps[2]} {
-                    padding: 0.71em 0;
-                  }
+                  ${'' /* width: 100px; */}
+                  height: 3.5em;
+                  flex-basis: auto;
+                  padding: 0.25em 2em;
                 `}
               >
                 Sign up
