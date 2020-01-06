@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/lenzgig-frontend/precache-manifest.5a6cb0b532dfbb215ec53859234d5767.js"
+  "/lenzgig-frontend/precache-manifest.e31e77c3d238c4811ec0fee2a3612b65.js"
 );
 
 self.addEventListener('message', (event) => {
