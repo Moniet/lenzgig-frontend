@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/Moniet/lenzgig-frontend/static/css/main.b100e6da.chunk.css",
-    "main.js": "/Moniet/lenzgig-frontend/static/js/main.945d57fe.chunk.js",
-    "main.js.map": "/Moniet/lenzgig-frontend/static/js/main.945d57fe.chunk.js.map",
-    "runtime-main.js": "/Moniet/lenzgig-frontend/static/js/runtime-main.e1673198.js",
-    "runtime-main.js.map": "/Moniet/lenzgig-frontend/static/js/runtime-main.e1673198.js.map",
-    "static/js/2.54d18199.chunk.js": "/Moniet/lenzgig-frontend/static/js/2.54d18199.chunk.js",
-    "static/js/2.54d18199.chunk.js.map": "/Moniet/lenzgig-frontend/static/js/2.54d18199.chunk.js.map",
-    "index.html": "/Moniet/lenzgig-frontend/index.html",
-    "precache-manifest.64dfa97097327f9b7344ef6fa20d008b.js": "/Moniet/lenzgig-frontend/precache-manifest.64dfa97097327f9b7344ef6fa20d008b.js",
-    "service-worker.js": "/Moniet/lenzgig-frontend/service-worker.js",
-    "static/css/main.b100e6da.chunk.css.map": "/Moniet/lenzgig-frontend/static/css/main.b100e6da.chunk.css.map",
-    "static/js/2.54d18199.chunk.js.LICENSE": "/Moniet/lenzgig-frontend/static/js/2.54d18199.chunk.js.LICENSE",
-    "static/media/logo.svg": "/Moniet/lenzgig-frontend/static/media/logo.25bf045c.svg"
+    "main.css": "/lenzgig-frontend/static/css/main.b100e6da.chunk.css",
+    "main.js": "/lenzgig-frontend/static/js/main.fa96562c.chunk.js",
+    "main.js.map": "/lenzgig-frontend/static/js/main.fa96562c.chunk.js.map",
+    "runtime-main.js": "/lenzgig-frontend/static/js/runtime-main.5ad832eb.js",
+    "runtime-main.js.map": "/lenzgig-frontend/static/js/runtime-main.5ad832eb.js.map",
+    "static/js/2.54d18199.chunk.js": "/lenzgig-frontend/static/js/2.54d18199.chunk.js",
+    "static/js/2.54d18199.chunk.js.map": "/lenzgig-frontend/static/js/2.54d18199.chunk.js.map",
+    "index.html": "/lenzgig-frontend/index.html",
+    "precache-manifest.5a6cb0b532dfbb215ec53859234d5767.js": "/lenzgig-frontend/precache-manifest.5a6cb0b532dfbb215ec53859234d5767.js",
+    "service-worker.js": "/lenzgig-frontend/service-worker.js",
+    "static/css/main.b100e6da.chunk.css.map": "/lenzgig-frontend/static/css/main.b100e6da.chunk.css.map",
+    "static/js/2.54d18199.chunk.js.LICENSE": "/lenzgig-frontend/static/js/2.54d18199.chunk.js.LICENSE",
+    "static/media/logo.svg": "/lenzgig-frontend/static/media/logo.25bf045c.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.e1673198.js",
+    "static/js/runtime-main.5ad832eb.js",
     "static/js/2.54d18199.chunk.js",
     "static/css/main.b100e6da.chunk.css",
-    "static/js/main.945d57fe.chunk.js"
+    "static/js/main.fa96562c.chunk.js"
   ]
 }
